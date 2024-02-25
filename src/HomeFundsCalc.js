@@ -340,7 +340,7 @@ function HomeLoanCalculator() {
                 <th>Month</th>
                 <th>Principal Payment</th>
                 <th>Interest Payment</th>
-                <th style={{ backgroundColor: '#D5F5E3' }}>Total Payment</th>
+                <th style={{ backgroundColor: '#D5F5E3' }}>Total EMI Payment</th>
                 <th style={{ backgroundColor: '#FDEBD0' }}>
                   Monthly Rent Payment
                 </th>

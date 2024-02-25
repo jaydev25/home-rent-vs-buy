@@ -335,6 +335,7 @@ function HomeLoanCalculator() {
             ({convertToSimplifiedForm(expenseValue.MF.toFixed(0), 3)})
           </p>
         </div>
+        <h3>Monthly Breakup</h3>
         <div style={{ flex: 1, width: '100%', overflow: 'scroll' }}>
           <table border="1px" style={{ display: 'table', width: '100%' }}>
             <thead>

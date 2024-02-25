@@ -105,7 +105,9 @@ function HomeLoanCalculator() {
         homeValue *= 1 + homeRateValue;
       }
 
-      currentDate = new Date(currentDate).setMonth(new Date(currentDate).getMonth() + 1);
+      currentDate = new Date(currentDate).setMonth(
+        new Date(currentDate).getMonth() + 1
+      );
 
       const diff = monthlyPayment - rent;
 
@@ -262,7 +264,7 @@ function HomeLoanCalculator() {
                   />
                 </td>
               </tr>
-              
+
               <tr>
                 <td colSpan={2}>
                   <button
@@ -302,6 +304,16 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.home.toFixed(0), 3)})
           </p>
+          <p style={{ backgroundColor: '#D6EAF8' }}>
+            Home Value:{' '}
+            <NumericFormat
+              value={expenseValue.homeValue.toFixed(0)}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'₹'}
+            />{' '}
+            ({convertToSimplifiedForm(expenseValue.homeValue.toFixed(0), 3)})
+          </p>
           <p style={{ backgroundColor: '#FDEBD0' }}>
             Total Rent Coast:{' '}
             <NumericFormat
@@ -322,16 +334,6 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.MF.toFixed(0), 3)})
           </p>
-          <p style={{ backgroundColor: '#D6EAF8' }}>
-            Home Value:{' '}
-            <NumericFormat
-              value={expenseValue.homeValue.toFixed(0)}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'₹'}
-            />{' '}
-            ({convertToSimplifiedForm(expenseValue.homeValue.toFixed(0), 3)})
-          </p>
         </div>
         <div style={{ flex: 1, width: '100%', overflow: 'scroll' }}>
           <table border="1px" style={{ display: 'table', width: '100%' }}>
@@ -340,7 +342,9 @@ function HomeLoanCalculator() {
                 <th>Month</th>
                 <th>Principal Payment</th>
                 <th>Interest Payment</th>
-                <th style={{ backgroundColor: '#D5F5E3' }}>Total EMI Payment</th>
+                <th style={{ backgroundColor: '#D5F5E3' }}>
+                  Total EMI Payment
+                </th>
                 <th style={{ backgroundColor: '#FDEBD0' }}>
                   Monthly Rent Payment
                 </th>
@@ -353,9 +357,7 @@ function HomeLoanCalculator() {
             <tbody>
               {monthlyPayments.map((payment) => (
                 <tr key={payment.month}>
-                  <td>
-                    {payment.month}
-                  </td>
+                  <td>{payment.month}</td>
                   <td>
                     <NumericFormat
                       value={payment.principalPayment}

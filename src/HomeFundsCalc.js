@@ -22,29 +22,6 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Value of your money overtime time',
-    },
-  },
-  scales: {
-    y: {
-      ticks: {
-        // Include a dollar sign in the ticks
-        callback: function (value, index, ticks) {
-          return convertToSimplifiedForm(value, 1);
-        },
-      },
-    },
-  },
-};
-
 function convertToSimplifiedForm(num, decimals) {
   if (num < 10000) {
     return num.toString();
@@ -77,6 +54,7 @@ function HomeLoanCalculator() {
   });
 
   const [dataSet, setDataSet] = useState(null);
+  const [chartOptions, setChartOptions] = useState(null);
 
   const handleCalculate = () => {
     let currentDate = new Date();
@@ -136,6 +114,34 @@ function HomeLoanCalculator() {
 
     setMonthlyPayments(payments);
 
+    setChartOptions({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Value of your money overtime time',
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            // Include a dollar sign in the ticks
+            callback: function (value, index, ticks) {
+              return convertToSimplifiedForm(value, 1);
+            },
+          },
+        },
+        x: {
+          ticks: {
+            maxTicksLimit: loanTerm
+          },
+        },
+      },
+    });
+
     setDataSet({
       labels: payments.map((payment) => payment.currentYear),
       datasets: [
@@ -159,6 +165,7 @@ function HomeLoanCalculator() {
         },
       ],
     });
+    
   };
 
   return (
@@ -285,7 +292,7 @@ function HomeLoanCalculator() {
         </div>
         <div style={{ flex: 1, width: '100%' }}>
           <Line
-            options={options}
+            options={chartOptions}
             data={dataSet || { labels: [], datasets: [] }}
           />
         </div>

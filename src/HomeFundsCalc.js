@@ -68,7 +68,7 @@ function HomeLoanCalculator() {
       homeValue = loanAmount;
     const monthlyPayment = (principal * rate) / (1 - Math.pow(1 + rate, -term));
     const monthlyInterestRate = sipRate / 12 / 100;
-    const homeRateValue = homeRate / 100;
+    const monthlyHomeRateValue = homeRate/ 12 / 100;
     const rentRateValue = rentRate / 100;
     const payments = [];
 
@@ -80,8 +80,8 @@ function HomeLoanCalculator() {
 
       if (i % 13 === 0) {
         rent *= 1 + rentRateValue;
-        homeValue *= 1 + homeRateValue;
       }
+      homeValue *= 1 + monthlyHomeRateValue;
 
       currentDate = new Date(currentDate).setMonth(
         new Date(currentDate).getMonth() + 1

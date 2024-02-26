@@ -13,6 +13,7 @@ import {
   BarElement,
 } from 'chart.js';
 import { Line, Doughnut, Pie, Bar } from 'react-chartjs-2';
+import { isMobile } from 'react-device-detect';
 
 ChartJS.register(
   ArcElement,
@@ -188,7 +189,12 @@ function HomeLoanCalculator() {
   return (
     <div style={{ padding: '10px' }}>
       <h2>Rent VS Buy Calculator</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+        }}
+      >
         <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <table border="1px" style={{ display: 'table', width: '100%' }}>
             <tbody>
@@ -316,8 +322,14 @@ function HomeLoanCalculator() {
       </div>
 
       <br />
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div style={{ flex: 1, width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          flexDirection: isMobile ? 'column' : 'row',
+        }}
+      >
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#32b04a' }}>
             Total Home Cost:{' '}
@@ -396,7 +408,7 @@ function HomeLoanCalculator() {
             </button>
           </div>
         </div>
-        <div style={{ flex: 1, width: '100%' }}>
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <div style={{ maxHeight: '325px' }}>
             {(() => {
               switch (chartType) {
@@ -420,7 +432,7 @@ function HomeLoanCalculator() {
                       style={{
                         position: 'relative',
                         left: '50%',
-                        transform: 'translateX(-50%)'
+                        transform: 'translateX(-50%)',
                       }}
                       data={doughnutChartData || { labels: [], datasets: [] }}
                       options={chartOptions}

@@ -128,7 +128,7 @@ function HomeLoanCalculator() {
         differenceAmount: (monthlyPayment - rent).toFixed(0),
         mutualFundsAmount: MF.toFixed(0),
         homeValue: homeValue.toFixed(0),
-        homeCoast: home.toFixed(0),
+        homeCost: home.toFixed(0),
       });
     }
 
@@ -153,7 +153,7 @@ function HomeLoanCalculator() {
         },
         {
           label: 'Money Spent',
-          data: payments.map((payment) => payment.homeCoast),
+          data: payments.map((payment) => payment.homeCost),
           borderColor: '#D5F5E3',
           backgroundColor: '#D5F5E3',
         },
@@ -296,7 +296,7 @@ function HomeLoanCalculator() {
         <div style={{ flex: 1, width: '100%' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#D5F5E3' }}>
-            Total Home Coast:{' '}
+            Total Home Cost:{' '}
             <NumericFormat
               value={expenseValue.home.toFixed(0)}
               displayType={'text'}
@@ -317,7 +317,7 @@ function HomeLoanCalculator() {
           </p>
           <p style={{ backgroundColor: '#989898' }}>In case of renting</p>
           <p style={{ backgroundColor: '#FDEBD0' }}>
-            Total Rent Coast:{' '}
+            Total Rent Cost:{' '}
             <NumericFormat
               value={expenseValue.rental.toFixed(0)}
               displayType={'text'}

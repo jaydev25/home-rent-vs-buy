@@ -163,8 +163,8 @@ function HomeLoanCalculator() {
         {
           label: 'Mutual Funds Value',
           data: payments.map((payment) => payment.mutualFundsAmount),
-          borderColor: '#499195',
-          backgroundColor: '#499195',
+          borderColor: '#25a5ff',
+          backgroundColor: '#25a5ff',
           pointStyle: false,
           borderWidth: 2
         },
@@ -185,8 +185,8 @@ function HomeLoanCalculator() {
         {
           label: '# of Votes',
           data: [home, homeValue, rental, MF],
-          backgroundColor: ['#32b04a', '#fec744', '#f1592a', '#499195'],
-          borderColor: ['#32b04a', '#fec744', '#f1592a', '#499195'],
+          backgroundColor: ['#32b04a', '#fec744', '#f1592a', '#25a5ff'],
+          borderColor: ['#32b04a', '#fec744', '#f1592a', '#25a5ff'],
         },
       ],
     });
@@ -288,7 +288,7 @@ function HomeLoanCalculator() {
                   />
                 </td>
               </tr>
-              <tr style={{ backgroundColor: '#499195' }}>
+              <tr style={{ backgroundColor: '#25a5ff' }}>
                 <td>
                   <label>SIP returns % pa:</label>
                 </td>
@@ -310,7 +310,7 @@ function HomeLoanCalculator() {
                       height: '50px',
                       cursor: 'pointer',
                       width: '100%',
-                      backgroundColor: '#25a5ff',
+                      backgroundColor: '#625df5',
                     }}
                   >
                     Calculate
@@ -380,7 +380,7 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.rental.toFixed(0), 3)})
           </p>
-          <p style={{ backgroundColor: '#499195' }}>
+          <p style={{ backgroundColor: '#25a5ff' }}>
             Rent VS EMI Difference Mutualfunds returns:{' '}
             <NumericFormat
               value={expenseValue.MF.toFixed(0)}
@@ -491,7 +491,7 @@ function HomeLoanCalculator() {
                 Monthly Rent Payment
               </th>
               <th>Monthly Rent VS EMI Difference</th>
-              <th style={{ backgroundColor: '#499195' }}>Mutual Funds Sum</th>
+              <th style={{ backgroundColor: '#25a5ff' }}>Mutual Funds Sum</th>
               <th style={{ backgroundColor: '#fec744' }}>Home Value</th>
               <th>Remaining Principal</th>
             </tr>
@@ -540,7 +540,7 @@ function HomeLoanCalculator() {
                     prefix={'₹'}
                   />
                 </td>
-                <td style={{ backgroundColor: '#499195' }}>
+                <td style={{ backgroundColor: '#25a5ff' }}>
                   <NumericFormat
                     value={payment.mutualFundsAmount}
                     displayType={'text'}

@@ -154,20 +154,20 @@ function HomeLoanCalculator() {
         {
           label: 'Home Value',
           data: payments.map((payment) => payment.homeValue),
-          borderColor: '#D6EAF8',
-          backgroundColor: '#D6EAF8',
+          borderColor: '#fec744',
+          backgroundColor: '#fec744',
         },
         {
           label: 'Mutual Funds Value',
           data: payments.map((payment) => payment.mutualFundsAmount),
-          borderColor: '#E8DAEF',
-          backgroundColor: '#E8DAEF',
+          borderColor: '#499195',
+          backgroundColor: '#499195',
         },
         {
           label: 'Money Spent',
           data: payments.map((payment) => payment.homeCost),
-          borderColor: '#D5F5E3',
-          backgroundColor: '#D5F5E3',
+          borderColor: '#32b04a',
+          backgroundColor: '#32b04a',
         },
       ],
     });
@@ -178,8 +178,8 @@ function HomeLoanCalculator() {
         {
           label: '# of Votes',
           data: [home, homeValue, rental, MF],
-          backgroundColor: ['#d5f5e3', '#d6eaf8', '#fdebd0', '#e8daef'],
-          borderColor: ['#d5f5e3', '#d6eaf8', '#fdebd0', '#e8daef'],
+          backgroundColor: ['#32b04a', '#fec744', '#f1592a', '#499195'],
+          borderColor: ['#32b04a', '#fec744', '#f1592a', '#499195'],
         },
       ],
     });
@@ -195,7 +195,7 @@ function HomeLoanCalculator() {
               <tr style={{ backgroundColor: '#989898' }}>
                 <td colSpan={2}>In case of buying</td>
               </tr>
-              <tr style={{ backgroundColor: '#D5F5E3' }}>
+              <tr style={{ backgroundColor: '#32b04a' }}>
                 <td>
                   {' '}
                   <label>Loan Amount:</label>
@@ -249,7 +249,7 @@ function HomeLoanCalculator() {
               <tr style={{ backgroundColor: '#989898' }}>
                 <td colSpan={2}>In case of renting</td>
               </tr>
-              <tr style={{ backgroundColor: '#FDEBD0' }}>
+              <tr style={{ backgroundColor: '#f1592a' }}>
                 <td>
                   <label>Probable rent of the house you want to own?:</label>
                 </td>
@@ -275,7 +275,7 @@ function HomeLoanCalculator() {
                   />
                 </td>
               </tr>
-              <tr style={{ backgroundColor: '#E8DAEF' }}>
+              <tr style={{ backgroundColor: '#499195' }}>
                 <td>
                   <label>SIP returns % pa:</label>
                 </td>
@@ -297,7 +297,7 @@ function HomeLoanCalculator() {
                       height: '50px',
                       cursor: 'pointer',
                       width: '100%',
-                      backgroundColor: '#D6EAF8',
+                      backgroundColor: '#25a5ff',
                     }}
                   >
                     Calculate
@@ -319,7 +319,7 @@ function HomeLoanCalculator() {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
-          <p style={{ backgroundColor: '#D5F5E3' }}>
+          <p style={{ backgroundColor: '#32b04a' }}>
             Total Home Cost:{' '}
             <NumericFormat
               value={expenseValue.home.toFixed(0)}
@@ -329,7 +329,7 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.home.toFixed(0), 3)})
           </p>
-          <p style={{ backgroundColor: '#D6EAF8' }}>
+          <p style={{ backgroundColor: '#fec744' }}>
             Home Value:{' '}
             <NumericFormat
               value={expenseValue.homeValue.toFixed(0)}
@@ -340,7 +340,7 @@ function HomeLoanCalculator() {
             ({convertToSimplifiedForm(expenseValue.homeValue.toFixed(0), 3)})
           </p>
           <p style={{ backgroundColor: '#989898' }}>In case of renting</p>
-          <p style={{ backgroundColor: '#FDEBD0' }}>
+          <p style={{ backgroundColor: '#f1592a' }}>
             Total Rent Cost:{' '}
             <NumericFormat
               value={expenseValue.rental.toFixed(0)}
@@ -350,7 +350,7 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.rental.toFixed(0), 3)})
           </p>
-          <p style={{ backgroundColor: '#E8DAEF' }}>
+          <p style={{ backgroundColor: '#499195' }}>
             Rent VS EMI Difference Mutualfunds returns:{' '}
             <NumericFormat
               value={expenseValue.MF.toFixed(0)}
@@ -397,18 +397,20 @@ function HomeLoanCalculator() {
           </div>
         </div>
         <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
-          <div>
+          <div style={{ maxHeight: '325px' }}>
             {(() => {
               switch (chartType) {
                 case 'pie':
                   return (
                     <Pie
+                      style={{ margin: 'auto' }}
                       data={doughnutChartData || { labels: [], datasets: [] }}
                     />
                   );
                 case 'doughnut':
                   return (
                     <Doughnut
+                      style={{ margin: 'auto' }}
                       data={doughnutChartData || { labels: [], datasets: [] }}
                     />
                   );
@@ -421,8 +423,9 @@ function HomeLoanCalculator() {
                   );
                 default:
                   return (
-                    <Pie
+                    <Bar
                       data={doughnutChartData || { labels: [], datasets: [] }}
+                      options={chartOptions}
                     />
                   );
               }
@@ -438,13 +441,13 @@ function HomeLoanCalculator() {
               <th>Month</th>
               <th>Principal Payment</th>
               <th>Interest Payment</th>
-              <th style={{ backgroundColor: '#D5F5E3' }}>Total EMI Payment</th>
-              <th style={{ backgroundColor: '#FDEBD0' }}>
+              <th style={{ backgroundColor: '#32b04a' }}>Total EMI Payment</th>
+              <th style={{ backgroundColor: '#f1592a' }}>
                 Monthly Rent Payment
               </th>
               <th>Monthly Rent VS EMI Difference</th>
-              <th style={{ backgroundColor: '#E8DAEF' }}>Mutual Funds Sum</th>
-              <th style={{ backgroundColor: '#D6EAF8' }}>Home Value</th>
+              <th style={{ backgroundColor: '#499195' }}>Mutual Funds Sum</th>
+              <th style={{ backgroundColor: '#fec744' }}>Home Value</th>
               <th>Remaining Principal</th>
             </tr>
           </thead>
@@ -468,7 +471,7 @@ function HomeLoanCalculator() {
                     prefix={'₹'}
                   />
                 </td>
-                <td style={{ backgroundColor: '#D5F5E3' }}>
+                <td style={{ backgroundColor: '#32b04a' }}>
                   <NumericFormat
                     value={payment.totalPayment}
                     displayType={'text'}
@@ -476,7 +479,7 @@ function HomeLoanCalculator() {
                     prefix={'₹'}
                   />
                 </td>
-                <td style={{ backgroundColor: '#FDEBD0' }}>
+                <td style={{ backgroundColor: '#f1592a' }}>
                   <NumericFormat
                     value={payment.rentPayment}
                     displayType={'text'}
@@ -492,7 +495,7 @@ function HomeLoanCalculator() {
                     prefix={'₹'}
                   />
                 </td>
-                <td style={{ backgroundColor: '#E8DAEF' }}>
+                <td style={{ backgroundColor: '#499195' }}>
                   <NumericFormat
                     value={payment.mutualFundsAmount}
                     displayType={'text'}
@@ -500,7 +503,7 @@ function HomeLoanCalculator() {
                     prefix={'₹'}
                   />
                 </td>
-                <td style={{ backgroundColor: '#D6EAF8' }}>
+                <td style={{ backgroundColor: '#fec744' }}>
                   <NumericFormat
                     value={payment.homeValue}
                     displayType={'text'}

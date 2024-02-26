@@ -360,7 +360,7 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.MF.toFixed(0), 3)})
           </p>
-          <div>
+          <div style={{ backgroundColor: '#989898', padding: '5px' }}>
             <button
               style={{
                 backgroundColor: chartType === 'bar' ? 'black' : 'white',

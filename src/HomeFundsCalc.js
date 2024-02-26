@@ -156,19 +156,23 @@ function HomeLoanCalculator() {
           label: 'Home Value',
           data: payments.map((payment) => payment.homeValue),
           borderColor: '#fec744',
-          backgroundColor: '#fec744',
+          pointStyle: false,
+          borderWidth: 2
         },
         {
           label: 'Mutual Funds Value',
           data: payments.map((payment) => payment.mutualFundsAmount),
           borderColor: '#499195',
-          backgroundColor: '#499195',
+          // backgroundColor: '#499195',
+          pointStyle: false,
+          borderWidth: 2
         },
         {
           label: 'Money Spent',
           data: payments.map((payment) => payment.homeCost),
           borderColor: '#32b04a',
-          backgroundColor: '#32b04a',
+          pointStyle: false,
+          borderWidth: 2
         },
       ],
     });

@@ -317,7 +317,7 @@ function HomeLoanCalculator() {
 
       <br />
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
+        <div style={{ flex: 1, width: '100%' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#32b04a' }}>
             Total Home Cost:{' '}

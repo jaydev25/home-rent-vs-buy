@@ -193,6 +193,7 @@ function HomeLoanCalculator() {
         style={{
           display: 'flex',
           flexWrap: 'wrap',
+          gap: 10,
         }}
       >
         <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
@@ -313,7 +314,17 @@ function HomeLoanCalculator() {
             </tbody>
           </table>
         </div>
-        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
+        <div
+          style={{
+            flex: 1,
+            width: '100%',
+            margin: 'auto',
+            boxShadow: '5px 5px',
+            borderRadius: '10px',
+            backgroundColor: '#eeeeee',
+            padding: 2
+          }}
+        >
           <Line
             options={chartOptions}
             data={dataSet || { labels: [], datasets: [] }}
@@ -327,6 +338,7 @@ function HomeLoanCalculator() {
           display: 'flex',
           flexWrap: 'wrap',
           flexDirection: isMobile ? 'column' : 'row',
+          gap: 10
         }}
       >
         <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
@@ -408,7 +420,17 @@ function HomeLoanCalculator() {
             </button>
           </div>
         </div>
-        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
+        <div
+          style={{
+            flex: 1,
+            width: '100%',
+            margin: 'auto',
+            boxShadow: '5px 5px',
+            borderRadius: '10px',
+            backgroundColor: '#eeeeee',
+            padding: 2
+          }}
+        >
           <div style={{ maxHeight: '325px' }}>
             {(() => {
               switch (chartType) {

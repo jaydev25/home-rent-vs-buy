@@ -189,7 +189,7 @@ function HomeLoanCalculator() {
     <div style={{ padding: '10px' }}>
       <h2>Rent VS Buy Calculator</h2>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div style={{ flex: 1, width: '100%' }}>
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <table border="1px" style={{ display: 'table', width: '100%' }}>
             <tbody>
               <tr style={{ backgroundColor: '#989898' }}>
@@ -307,7 +307,7 @@ function HomeLoanCalculator() {
             </tbody>
           </table>
         </div>
-        <div style={{ flex: 1, width: '100%' }}>
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <Line
             options={chartOptions}
             data={dataSet || { labels: [], datasets: [] }}
@@ -317,7 +317,7 @@ function HomeLoanCalculator() {
 
       <br />
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div style={{ flex: 1, width: '100%' }}>
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#D5F5E3' }}>
             Total Home Cost:{' '}
@@ -396,7 +396,7 @@ function HomeLoanCalculator() {
             </button>
           </div>
         </div>
-        <div style={{ flex: 1, width: '100%' }}>
+        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
           <div>
             {(() => {
               switch (chartType) {

@@ -396,7 +396,7 @@ function HomeLoanCalculator() {
             </button>
           </div>
         </div>
-        <div style={{ flex: 1, width: '100%', margin: 'auto' }}>
+        <div style={{ flex: 1, width: '100%' }}>
           <div style={{ maxHeight: '325px' }}>
             {(() => {
               switch (chartType) {

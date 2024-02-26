@@ -417,6 +417,11 @@ function HomeLoanCalculator() {
                 case 'bar':
                   return (
                     <Bar
+                      style={{
+                        position: 'relative',
+                        left: '50%',
+                        transform: 'translateX(-50%)'
+                      }}
                       data={doughnutChartData || { labels: [], datasets: [] }}
                       options={chartOptions}
                     />

@@ -9,17 +9,21 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  BarElement,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Doughnut, Pie, Bar } from 'react-chartjs-2';
 
 ChartJS.register(
+  ArcElement,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarElement
 );
 
 function convertToSimplifiedForm(num, decimals) {
@@ -55,6 +59,8 @@ function HomeLoanCalculator() {
 
   const [dataSet, setDataSet] = useState(null);
   const [chartOptions, setChartOptions] = useState(null);
+  const [doughnutChartData, setDoughnutChartData] = useState(null);
+  const [chartType, setChartType] = useState('bar');
 
   const handleCalculate = () => {
     let currentDate = new Date();
@@ -68,7 +74,7 @@ function HomeLoanCalculator() {
       homeValue = loanAmount;
     const monthlyPayment = (principal * rate) / (1 - Math.pow(1 + rate, -term));
     const monthlyInterestRate = sipRate / 12 / 100;
-    const monthlyHomeRateValue = homeRate/ 12 / 100;
+    const monthlyHomeRateValue = homeRate / 12 / 100;
     const rentRateValue = rentRate / 100;
     const payments = [];
 
@@ -136,7 +142,7 @@ function HomeLoanCalculator() {
         },
         x: {
           ticks: {
-            maxTicksLimit: loanTerm
+            maxTicksLimit: loanTerm,
           },
         },
       },
@@ -165,7 +171,18 @@ function HomeLoanCalculator() {
         },
       ],
     });
-    
+
+    setDoughnutChartData({
+      labels: ['Home cost', 'Home value', 'Rent cost', 'Mutual funds value'],
+      datasets: [
+        {
+          label: '# of Votes',
+          data: [home, homeValue, rental, MF],
+          backgroundColor: ['#d5f5e3', '#d6eaf8', '#fdebd0', '#e8daef'],
+          borderColor: ['#d5f5e3', '#d6eaf8', '#fdebd0', '#e8daef'],
+        },
+      ],
+    });
   };
 
   return (
@@ -299,7 +316,7 @@ function HomeLoanCalculator() {
       </div>
 
       <br />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div style={{ flex: 1, width: '100%' }}>
           <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#D5F5E3' }}>
@@ -343,100 +360,166 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.MF.toFixed(0), 3)})
           </p>
+          <div>
+            <button
+              style={{
+                backgroundColor: chartType === 'bar' ? 'black' : 'white',
+                color: chartType === 'bar' ? 'white' : 'black',
+              }}
+              onClick={() => {
+                setChartType('bar');
+              }}
+            >
+              BAR Chart
+            </button>
+            <button
+              style={{
+                backgroundColor: chartType === 'pie' ? 'black' : 'white',
+                color: chartType === 'pie' ? 'white' : 'black',
+              }}
+              onClick={() => {
+                setChartType('pie');
+              }}
+            >
+              PIE Chart
+            </button>
+            <button
+              style={{
+                backgroundColor: chartType === 'doughnut' ? 'black' : 'white',
+                color: chartType === 'doughnut' ? 'white' : 'black',
+              }}
+              onClick={() => {
+                setChartType('doughnut');
+              }}
+            >
+              Doughnut Chart
+            </button>
+          </div>
         </div>
-        <h3>Monthly Breakup</h3>
-        <div style={{ flex: 1, width: '100%', overflow: 'scroll' }}>
-          <table border="1px" style={{ display: 'table', width: '100%' }}>
-            <thead>
-              <tr>
-                <th>Month</th>
-                <th>Principal Payment</th>
-                <th>Interest Payment</th>
-                <th style={{ backgroundColor: '#D5F5E3' }}>
-                  Total EMI Payment
-                </th>
-                <th style={{ backgroundColor: '#FDEBD0' }}>
-                  Monthly Rent Payment
-                </th>
-                <th>Monthly Rent VS EMI Difference</th>
-                <th style={{ backgroundColor: '#E8DAEF' }}>Mutual Funds Sum</th>
-                <th style={{ backgroundColor: '#D6EAF8' }}>Home Value</th>
-                <th>Remaining Principal</th>
+        <div style={{ flex: 1, width: '100%' }}>
+          <div>
+            {(() => {
+              switch (chartType) {
+                case 'pie':
+                  return (
+                    <Pie
+                      data={doughnutChartData || { labels: [], datasets: [] }}
+                    />
+                  );
+                case 'doughnut':
+                  return (
+                    <Doughnut
+                      data={doughnutChartData || { labels: [], datasets: [] }}
+                    />
+                  );
+                case 'bar':
+                  return (
+                    <Bar
+                      data={doughnutChartData || { labels: [], datasets: [] }}
+                      options={chartOptions}
+                    />
+                  );
+                default:
+                  return (
+                    <Pie
+                      data={doughnutChartData || { labels: [], datasets: [] }}
+                    />
+                  );
+              }
+            })()}
+          </div>
+        </div>
+      </div>
+      <h3>Monthly Breakup</h3>
+      <div style={{ flex: 1, width: '100%', overflow: 'scroll' }}>
+        <table border="1px" style={{ display: 'table', width: '100%' }}>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Principal Payment</th>
+              <th>Interest Payment</th>
+              <th style={{ backgroundColor: '#D5F5E3' }}>Total EMI Payment</th>
+              <th style={{ backgroundColor: '#FDEBD0' }}>
+                Monthly Rent Payment
+              </th>
+              <th>Monthly Rent VS EMI Difference</th>
+              <th style={{ backgroundColor: '#E8DAEF' }}>Mutual Funds Sum</th>
+              <th style={{ backgroundColor: '#D6EAF8' }}>Home Value</th>
+              <th>Remaining Principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {monthlyPayments.map((payment) => (
+              <tr key={payment.month}>
+                <td>{payment.month}</td>
+                <td>
+                  <NumericFormat
+                    value={payment.principalPayment}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    value={payment.interestPayment}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td style={{ backgroundColor: '#D5F5E3' }}>
+                  <NumericFormat
+                    value={payment.totalPayment}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td style={{ backgroundColor: '#FDEBD0' }}>
+                  <NumericFormat
+                    value={payment.rentPayment}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    value={payment.differenceAmount}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td style={{ backgroundColor: '#E8DAEF' }}>
+                  <NumericFormat
+                    value={payment.mutualFundsAmount}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td style={{ backgroundColor: '#D6EAF8' }}>
+                  <NumericFormat
+                    value={payment.homeValue}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    value={payment.remainingPrincipal}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'₹'}
+                  />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {monthlyPayments.map((payment) => (
-                <tr key={payment.month}>
-                  <td>{payment.month}</td>
-                  <td>
-                    <NumericFormat
-                      value={payment.principalPayment}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td>
-                    <NumericFormat
-                      value={payment.interestPayment}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td style={{ backgroundColor: '#D5F5E3' }}>
-                    <NumericFormat
-                      value={payment.totalPayment}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td style={{ backgroundColor: '#FDEBD0' }}>
-                    <NumericFormat
-                      value={payment.rentPayment}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td>
-                    <NumericFormat
-                      value={payment.differenceAmount}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td style={{ backgroundColor: '#E8DAEF' }}>
-                    <NumericFormat
-                      value={payment.mutualFundsAmount}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td style={{ backgroundColor: '#D6EAF8' }}>
-                    <NumericFormat
-                      value={payment.homeValue}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                  <td>
-                    <NumericFormat
-                      value={payment.remainingPrincipal}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'₹'}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

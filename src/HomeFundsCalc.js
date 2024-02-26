@@ -294,6 +294,7 @@ function HomeLoanCalculator() {
       <br />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ flex: 1, width: '100%' }}>
+          <p style={{ backgroundColor: '#989898' }}>In case of buying</p>
           <p style={{ backgroundColor: '#D5F5E3' }}>
             Total Home Coast:{' '}
             <NumericFormat
@@ -314,6 +315,7 @@ function HomeLoanCalculator() {
             />{' '}
             ({convertToSimplifiedForm(expenseValue.homeValue.toFixed(0), 3)})
           </p>
+          <p style={{ backgroundColor: '#989898' }}>In case of renting</p>
           <p style={{ backgroundColor: '#FDEBD0' }}>
             Total Rent Coast:{' '}
             <NumericFormat
